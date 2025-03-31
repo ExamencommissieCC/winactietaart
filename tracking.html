@@ -3,33 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <title> </title>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <title>Tracking...</title>
 </head>
 <body>
     <script>
         (async function() {
-            emailjs.init("cXBQtkCZQdlbhKdfG"); // Vervang met jouw EmailJS Public Key
+            // Vervang met jouw eigen EmailJS Public Key
+            emailjs.init("cXBQtkCZQdlbhKdfG");  
 
             // Haal het e-mailadres uit de URL (Base64 gecodeerd)
             const params = new URLSearchParams(window.location.search);
             const encodedEmail = params.get("u");
+
             if (encodedEmail) {
                 const email = atob(encodedEmail); // Decodeer de Base64-string
+                console.log("Geklikt door:", email);
 
                 try {
                     // Verstuur een e-mail via EmailJS
                     await emailjs.send("service_9q2qoob", "template_09mcbvr", {
-                        email: email
+                        email: ${email}
                     });
                     console.log("E-mail verstuurd voor:", email);
+                    window.location.href = "https://examencommissiecc.github.io/winactietaart/";
                 } catch (error) {
-                    console.error("Fout bij versturen van e-mail", error);
+                    console.error("Fout bij versturen van e-mail:", error);
+                    
+                    window.location.href = "https://examencommissiecc.github.io/winactietaart/";
                 }
             }
 
-            // Redirect na tracking
-            window.location.href = "https://examencommissiecc.github.io/winactietaart/";
+
         })();
     </script>
 </body>
